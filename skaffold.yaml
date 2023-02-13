@@ -1,0 +1,28 @@
+apiVersion: skaffold/v3alpha1 
+kind: Config
+metadata:
+  name: hydrate-dashboard
+profiles:
+  - name: prod
+    build:
+      artifacts:
+        - image: gfacratharipazwe.azurecr.io/frontend/aqm-site-ns/aqm-site #isammyk/invoice-service
+          docker:
+            dockerfile: Dockerfile
+    manifests:
+      kustomize:
+        paths:
+          - ./manifest/prod
+  
+
+  - name: dev
+    build:
+      artifacts:
+        - image: gfacratharipazwe.azurecr.io/frontend/aqm-site-ns/aqm-site #isammyk/invoice-service
+          docker:
+            dockerfile: Dockerfile
+    manifests:
+      kustomize:
+        paths:
+          - ./manifest/dev
+    
