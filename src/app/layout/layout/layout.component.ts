@@ -13,6 +13,7 @@ export class LayoutComponent implements OnInit {
   // mobileMenuTrigger: ElementRef;
   mobileViewClass = 'mobile-menu-overlay';
   activeFragment = this.activatedRoute.fragment.pipe(share());
+  currentDateStr: string = new Date().getFullYear().toString();
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
@@ -32,12 +33,12 @@ export class LayoutComponent implements OnInit {
 
   showMobileView(): void {
     this.mobileViewClass = 'mobile-menu-overlay active';
-    this.document.body.classList.add('no-overflow');
+    // this.document.body.classList.add('no-overflow');
   }
 
   hideMobileView(): void {
     this.mobileViewClass = 'mobile-menu-overlay';
-    this.document.body.classList.add('no-overflow');
+    // this.document.body.classList.add('no-overflow');
   }
 
   routeUrl(url: string): void {
