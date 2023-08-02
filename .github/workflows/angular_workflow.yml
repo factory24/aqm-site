@@ -32,7 +32,7 @@ jobs:
 
     steps:
     - name: Deploy to Digital Ocean
-      uses: appleboy/scp-action@v0.3.0
+      uses: appleboy/scp-action@v1
       with:
         host: ${{ secrets.DROPLET_IP }} # The IP address of your Digital Ocean Droplet
         username: ${{ secrets.DROPLET_USERNAME }} # The username for accessing the Droplet
