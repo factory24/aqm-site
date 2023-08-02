@@ -37,5 +37,5 @@ jobs:
         host: ${{ secrets.DROPLET_IP }} # The IP address of your Digital Ocean Droplet
         username: ${{ secrets.DROPLET_USERNAME }} # The username for accessing the Droplet
         key: ${{ secrets.SSH_PRIVATE_KEY }} # Your private SSH key (use secrets to store it securely)
-        source: "dist/" # The path to your Angular build artifacts
+        source: "dist" # The path to your Angular build artifacts
         target: /var/www/html/ # The web server directory where the app will be deployed
