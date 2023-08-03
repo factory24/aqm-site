@@ -31,11 +31,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Deploy to Digital Ocean
-      uses: appleboy/scp-action@v0.1.4
-      with:
-        host: ${{ secrets.DROPLET_IP }} # The IP address of your Digital Ocean Droplet
-        username: ${{ secrets.DROPLET_USERNAME }} # The username for accessing the Droplet
-        key: ${{ secrets.SSH_PRIVATE_KEY }} # Your private SSH key (use secrets to store it securely)
-        source: "dist" # The path to your Angular build artifacts
-        target: /var/www/html/ # The web server directory where the app will be deployed
+      - name: Displaying Current Directory
+        run: ls -a 
+      - name: Display Contents of "dist" Directory
+        run: ls -lR dist
+      - name: Deploy to Digital Ocean
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.DROPLET_IP }}
+          username: ${{ secrets.DROPLET_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "dist"
+          target: /var/www/html/
+
