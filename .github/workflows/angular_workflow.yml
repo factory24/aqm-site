@@ -31,10 +31,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Displaying Current Directory
-        run: ls -a 
-      - name: Display Contents of "dist" Directory
-        run: ls -lR dist
       - name: Deploy to Digital Ocean
         uses: appleboy/scp-action@v0.1.4
         with:
