@@ -45,9 +45,7 @@ jobs:
               echo 'Clone repo from github to app directory'
               git clone git@github.com:factory24/aqm-site.git
               echo 'Building the project'
-              cd aqm-site && npm run build
-              echo 'Showing current directory items'
-              ll 
+              cd aqm-site && npm run build 
               echo 'Copy the build files to web server'
               cp -f ./dist /var/www/html
               echo 'Restart the nginx server'
