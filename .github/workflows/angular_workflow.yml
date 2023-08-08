@@ -1,54 +1,37 @@
-# .github/workflows/angular-cd.yml
-
-name: Angular CI/CD with Digital Ocean
+name: Deploy Angular App to Droplet
 
 on:
   push:
     branches:
-      - main # Change this to the branch you want to trigger the workflow
+      - main  # Change to your preferred branch
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14.x' # Change this to match your project's Node.js version
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Build Angular app
-      run: npm run build
-
   deploy:
-    needs: build
     runs-on: ubuntu-latest
 
     steps:
-      - name: Deploy to Digital Ocean
-        uses: appleboy/ssh-action@v0.1.2
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
         with:
-          host: ${{ secrets.DROPLET_IP }}
-          username: ${{ secrets.DROPLET_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-              echo 'Creating app directory to house the app'
-              mkdir app
-              echo 'Cd into the current folder'
-              cd app
-              echo 'Clone repo from github to app directory'
-              git clone git@github.com:factory24/aqm-site.git
-              echo 'Building the project'
-              cd aqm-site && npm run build 
-              echo 'Copy the build files to web server'
-              cp -f ./dist /var/www/html
-              echo 'Restart the nginx server'
-              sudo service nginx restart
+          node-version: 16.14.2  # Change to your preferred Node.js version
+
+      - name: Install Angular CLI
+        run: npm install -g @angular/cli
+
+      - name: Build Angular App
+        run: npm run build
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.1
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Deploy to Droplet
+        run: |
+          ssh -o StrictHostKeyChecking=no ${secrets.DROPLET_USERNAME}@${secrets.DROPLET_IP} 'rm -rf /var/www/html/*'
+          scp -o StrictHostKeyChecking=no -r dist/* ${secrets.DROPLET_USERNAME}@${secrets.DROPLET_IP}:/var/www/html/
 
 
