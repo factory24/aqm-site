@@ -1,20 +1,20 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: aqm-site-ingres
-  namespace: aqm-site-ns
+  name: aquametrics
+  namespace: aquametrics
 spec:
   hosts:
-    - 'preview.aquametrics.net'
+    - 'aquametrics.ch'
   gateways:
-    - aqm-prod-gateway
+    - aquametrics
   http:
-    - name: "aqm-site"
+    - name: "aquametrics-routes"
       match:
         - uri:
             prefix: /
       route:
         - destination:
-            host: aqm-site.aqm-site-ns.svc.cluster.local
+            host: aquametrics.aquametrics.svc.cluster.local
             port:
               number: 80

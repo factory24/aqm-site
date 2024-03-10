@@ -1,8 +1,8 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
-  name: aqm-prod-gateway
-  namespace: aqm-site-ns
+  name: aquametrics
+  namespace: aquametrics
 spec:
   selector:
     istio: ingressgateway
@@ -12,7 +12,7 @@ spec:
         name: http
         protocol: HTTP
       hosts:
-        - "preview.aquametrics.net"
+        - "aquametrics.ch"
       tls:
         httpsRedirect: true
     - port:
@@ -21,6 +21,6 @@ spec:
         protocol: HTTPS
       tls:
         mode: SIMPLE
-        credentialName: aqm-prod-hydrate-net-tls
+        credentialName: aquametrics-tls
       hosts:
-        - "preview.aquametrics.net"
+        - "aquametrics.ch"

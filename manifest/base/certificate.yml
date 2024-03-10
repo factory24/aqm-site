@@ -7,6 +7,6 @@ spec:
   secretName: aqm-prod-hydrate-net-tls
   issuerRef:
     name: letsencrypt
-  commonName: preview.aquametrics.net
+  commonName: preview.aquametrics.ch
   dnsNames:
-    - preview.aquametrics.net
+    - preview.aquametrics.ch

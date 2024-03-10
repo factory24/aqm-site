@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aquametrics
+  namespace: aquametrics
+  labels:
+    app: aquametrics
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aquametrics
+  template:
+    metadata:
+      labels:
+        app: aquametrics
+    spec:
+      containers:
+        - name: aquametrics
+          image: gfacratharipazwe.azurecr.io/frontend/aquametrics/website:latest
+      restartPolicy: Always

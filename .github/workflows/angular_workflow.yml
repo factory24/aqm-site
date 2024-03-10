@@ -34,7 +34,7 @@ jobs:
 
       - name: Deploy to Droplet
         run: |
-          ssh -o StrictHostKeyChecking=no ${{secrets.DROPLET_USERNAME}}@${{secrets.DROPLET_IP}} 'rm -rf /var/www/aquametrics.net/*'
-          scp -o StrictHostKeyChecking=no -r dist/* ${{secrets.DROPLET_USERNAME}}@${{secrets.DROPLET_IP}}:/var/www/aquametrics.net/
+          ssh -o StrictHostKeyChecking=no ${{secrets.DROPLET_USERNAME}}@${{secrets.DROPLET_IP}} 'rm -rf /var/www/aquametrics.ch/*'
+          scp -o StrictHostKeyChecking=no -r dist/* ${{secrets.DROPLET_USERNAME}}@${{secrets.DROPLET_IP}}:/var/www/aquametrics.ch/
 
 
